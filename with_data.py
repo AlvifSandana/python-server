@@ -31,6 +31,7 @@ while True:
     content = fin.read()
     fin.close()
 
+
     # Send HTTP response
     response = 'HTTP/1.0 200 OK\n\n' + content
     client_connection.sendall(response.encode())

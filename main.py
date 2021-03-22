@@ -26,8 +26,27 @@ while True:
     ctn = json.dumps(content)
     fin.close()
 
+    # menyiapkan variabel
+    html = ''
+
+    # loop data mahasiswa dan ubah jadi string
+    for d in content['mahasiswa']:
+        html += f"<tr><td>{d['nim']}</td><td>{d['nama']}</td><td>{d['angkatan']}</td></tr>"
+
+    # jadikan satu variabel html dengan html_jadi
+    html_jadi = f'<html><head><title>JSON</title></head><body><table border="1">{html}</table></body></html>'
+
+    # tulis file baru
+    with open('index_rendered.html', 'w') as f:
+        f.write(html_jadi)
+
+    # baca file baru
+    with open('index_rendered.html', 'r') as bebas:
+        html_ren = bebas.read()
+
+
     # Send HTTP response (json)
-    response = f'HTTP/1.0 200 OK\nContent-Type: text-json\n\n{ctn}'
+    response = f"HTTP/1.0 200 OK\n\n {html_ren}"
     client_connection.sendall(response.encode())
     client_connection.close()
 

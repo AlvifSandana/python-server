@@ -1,21 +1,11 @@
-# import json
-#
-# nama_mhs = []
-# nim_mhs = []
-# angkatan_mhs = []
-#
-# with open('data.json') as f:
-#     data = json.load(f)
-#
-# print(data['mahasiswa'][0]['nama'])
-#
-#
-# print(nim_mhs)
+import json
 
-import requests
+html = ''
 
-url = 'https://google.com'
+with open('data.json') as f:
+    data = json.load(f)
 
-respon = requests.get(url)
+for d in data['mahasiswa']:
+    html += f"<tr><td>{d['nim']}</td><td>{d['nama']}</td><td>{d['angkatan']}</td></tr>"
 
-print(respon.headers)
+print(html)
