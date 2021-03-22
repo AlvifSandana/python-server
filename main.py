@@ -34,7 +34,11 @@ while True:
         html += f"<tr><td>{d['nim']}</td><td>{d['nama']}</td><td>{d['angkatan']}</td></tr>"
 
     # jadikan satu variabel html dengan html_jadi
-    html_jadi = f'<html><head><title>JSON</title></head><body><table border="1">{html}</table></body></html>'
+    html_jadi = f'<html>'\
+                f'<head><title>JSON</title></head>'\
+                f'<body>'\
+                f'<table border="1"><tr><td>NIM</td><td>Nama</td><td>Angkatan</td></tr>{html}</table>'\
+                f'</body></html>'
 
     # tulis file baru
     with open('index_rendered.html', 'w') as f:
