@@ -1,0 +1,8 @@
+{
+  "mahasiswa" : [
+    {"nim": "121212", "nama": "john", "angkatan": 2019},
+    {"nim": "121213", "nama": "leo", "angkatan": 2018},
+    {"nim": "121214", "nama": "kira", "angkatan": 2020},
+    {"nim": "121215", "nama": "meme", "angkatan": 2018}
+  ]
+}
