@@ -23,7 +23,6 @@ while True:
     # buka data.json
     fin = open('data.json')
     content = json.load(fin)
-    ctn = json.dumps(content)
     fin.close()
 
     # menyiapkan variabel
