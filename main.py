@@ -20,36 +20,43 @@ while True:
     request = client_connection.recv(1024).decode()
     print(request)
 
-    # buka data.json
-    fin = open('data.json')
-    content = json.load(fin)
-    fin.close()
+    rute = request.split(" ")
+    if rute[1] == '/':
+        try:
+            # buka data.json
+            fin = open('data.json')
+            content = json.load(fin)
+            fin.close()
 
-    # menyiapkan variabel
-    html = ''
+            # menyiapkan variabel
+            html = ''
 
-    # loop data mahasiswa dan ubah jadi string
-    for d in content['mahasiswa']:
-        html += f"<tr><td>{d['nim']}</td><td>{d['nama']}</td><td>{d['angkatan']}</td></tr>"
+            # loop data mahasiswa dan ubah jadi string
+            for d in content['mahasiswa']:
+                html += f"<tr><td>{d['nim']}</td><td>{d['nama']}</td><td>{d['angkatan']}</td></tr>"
 
-    # jadikan satu variabel html dengan html_jadi
-    html_jadi = f'<html>'\
-                f'<head><title>JSON</title></head>'\
-                f'<body>'\
-                f'<table border="1"><tr><td>NIM</td><td>Nama</td><td>Angkatan</td></tr>{html}</table>'\
-                f'</body></html>'
+            # jadikan satu variabel html dengan html_jadi
+            html_jadi = f'<html>' \
+                        f'<head><title>JSON</title></head>' \
+                        f'<body>' \
+                        f'<table border="1"><tr><td>NIM</td><td>Nama</td><td>Angkatan</td></tr>{html}</table>' \
+                        f'</body></html>'
 
-    # tulis file baru
-    with open('index_rendered.html', 'w') as f:
-        f.write(html_jadi)
+            # tulis file baru
+            with open('index_rendered.html', 'w') as f:
+                f.write(html_jadi)
 
-    # baca file baru
-    with open('index_rendered.html', 'r') as bebas:
-        html_ren = bebas.read()
+            # baca file baru
+            with open('index_rendered.html', 'r') as bebas:
+                html_ren = bebas.read()
 
+            # Send HTTP response (json)
+            response = f"HTTP/1.0 200 OK\n\n {html_ren}"
+        except Exception as e:
+            print(f'Error occured!! ({e})')
+    else:
+        response = "HTTP/1.0 400 Not Found\n\n404 Not Found"
 
-    # Send HTTP response (json)
-    response = f"HTTP/1.0 200 OK\n\n {html_ren}"
     client_connection.sendall(response.encode())
     client_connection.close()
 
