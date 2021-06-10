@@ -1,3 +1,4 @@
+import json
 import socket
 
 # host dan port
@@ -19,23 +20,17 @@ while True:
     request = client_connection.recv(1024).decode()
     print(request)
 
-    # Parse HTTP headers
-    headers = request.split('\n')
-    filename = headers[0].split()[1]
+    # read data
+    with open('data.json') as f:
+        data = json.load(f)
 
-    # Get the content of the file
-    if filename == '/':
-        filename = '/index.html'
+    
 
-    try:
-        fin = open('' + filename)
-        content = fin.read()
-        fin.close()
+    # Get the content of htdocs/index.html
+    fin = open('../htdocs/index.html')
+    content = fin.read()
+    fin.close()
 
-        response = 'HTTP/1.0 200 OK\n\n' + content
-    except FileNotFoundError:
-
-        response = 'HTTP/1.0 404 NOT FOUND\n\nFile Not Found'
 
     # Send HTTP response
     response = 'HTTP/1.0 200 OK\n\n' + content
