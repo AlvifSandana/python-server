@@ -1,3 +1,17 @@
-.container h1 {
-    color: #e0e0e0;
+h1 {
+    text-align: center;
+}
+
+img {
+    display: block;
+    margin: 0px auto 0px auto;
+}
+
+video {
+    display: block;
+    margin: 0px auto 0px auto;
+}
+
+.container{
+    padding: 0px 50px 0px 50px;
 }
